@@ -1,0 +1,334 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Wrapped.inn - Gifts & Special Collections. Explore exclusive collections and special offers." />
+  <title>Wrapped.inn — Home</title>
+  <style>
+    :root {
+      --maxw: 1100px;
+      --accent: #e91e63;
+      --accent-light: rgba(233,30,99,0.1);
+      --muted: #666;
+      --bg: #fff;
+      --text: #111;
+      --shadow: rgba(16,24,40,0.06);
+      --font-family: 'Inter', system-ui, Arial, Helvetica, sans-serif;
+      --border-radius: 10px;
+      --transition: transform 0.25s ease-in-out;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: var(--font-family);
+      margin: 0;
+      color: var(--text);
+      background: #fafafa;
+      line-height: 1.4;
+      -webkit-font-smoothing: antialiased;
+    }
+    .container { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px; }
+    header {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 12px 0; border-bottom: 1px solid #eee;
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .brand img { height: 54px; width: auto; display: block; }
+    .brand-text .name { font-weight: 700; font-size: 1.25rem; }
+    .brand-text .tagline { font-size: 0.9rem; color: var(--muted); }
+
+    nav.nav-icons { display: flex; gap: 16px; align-items: center; }
+    .icon {
+      width: 40px; height: 40px; display: inline-grid; place-items: center;
+      border-radius: 8px; background: #f2f2f2; cursor: pointer;
+      transition: background-color 0.3s ease; color: var(--accent);
+      border: 1px solid transparent;
+      text-decoration: none;
+    }
+    .icon:hover { background-color: var(--accent-light); border-color: var(--accent); }
+
+    main { margin-top: 24px; }
+
+    /* HERO SLIDESHOW FIXED */
+    #hero {
+      text-align: center;
+      padding: 20px;
+      background: linear-gradient(180deg, #fff, #f9f9f9);
+    }
+    .slideshow {
+      position: relative;
+      width: 100%;
+      overflow: hidden;
+    }
+    .slideshow img {
+      width: 100%;
+      height: auto;
+      border-radius: 20px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+      opacity: 0;
+      transition: opacity 1.5s ease-in-out;
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .slideshow img.active {
+      position: relative;
+      opacity: 1;
+      z-index: 2;
+    }
+
+    /* PRODUCTS */
+    .products { margin-top: 40px; }
+    .products h2 {
+      font-weight: 700; font-size: 1.5rem; border-bottom: 2px solid var(--accent);
+      display: inline-block; padding-bottom: 4px; margin-bottom: 18px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 22px;
+    }
+    .card {
+      background: var(--bg); border-radius: var(--border-radius);
+      overflow: hidden; box-shadow: 0 6px 18px var(--shadow);
+      display: flex; flex-direction: column; cursor: pointer;
+      transition: var(--transition);
+    }
+    .card:hover { transform: scale(1.05); box-shadow: 0 10px 28px rgba(233,30,99,0.25); }
+    .card img {
+      width: 100%; height: 220px; object-fit: contain; background: #fff;
+      border-bottom: 1px solid #eee;
+    }
+    .body { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
+    .title { font-weight: 600; font-size: 1.1rem; }
+    .price-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .orig { color: var(--muted); text-decoration: line-through; font-size: 0.95rem; }
+    .disc { font-weight: 700; color: var(--accent); }
+    .badge { background: var(--accent-light); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
+
+    footer {
+      margin-top: 50px; padding: 24px 0; border-top: 1px solid #eee;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px; font-size: 0.9rem; color: var(--muted);
+    }
+    .social a { 
+      text-decoration: none; color: inherit; font-weight: 600; transition: color 0.3s ease; 
+      /* Style to align icon and text */
+      display: inline-flex; 
+      align-items: center; 
+      gap: 6px;
+    }
+    .social a:hover { color: var(--accent); }
+    .social svg { fill: currentColor; } /* Ensures the icon color changes on hover */
+
+    @media (max-width: 720px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .brand img { height: 46px; }
+      footer { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* MODAL STYLES */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+    .modal-content {
+      background-color: var(--bg);
+      margin: 10% auto; /* 10% from the top and centered */
+      padding: 20px;
+      border-radius: var(--border-radius);
+      width: 90%;
+      max-width: 600px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      max-height: 80vh; /* Max height to allow scrolling */
+      overflow-y: auto;
+      position: relative;
+    }
+    .modal-content h2 { color: var(--accent); margin-top: 0; }
+    .modal-content p { margin: 10px 0; }
+    .close {
+      color: var(--muted);
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      line-height: 1;
+      transition: color 0.3s ease;
+    }
+    .close:hover,
+    .close:focus {
+      color: var(--accent);
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .modal-content strong { font-weight: 700; display: block; margin: 10px 0 5px 0; }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="wrappedlogo.png" alt="Wrapped.inn logo" />
+        <div class="brand-text">
+          <div class="name">wrapped.inn</div>
+          <div class="tagline">Gifts &amp; Special Collections</div>
+        </div>
+      </div>
+      <nav class="nav-icons">
+        <a href="cart.html" class="icon" title="Cart">🛒</a>
+        <a href="tel:+910000000000" class="icon" title="Contact">📞</a>
+        <a href="#specialReq" class="icon" title="Special Request">🗒</a>
+      </nav>
+    </header>
+
+    <main>
+      <section id="hero">
+        <div class="slideshow">
+          <img src="poster.png" alt="Wrapped.inn banner 1" class="active">
+          <img src="poster1.png" alt="Wrapped.inn banner 2">
+        </div>
+      </section>
+
+      <section class="products">
+        <h2>Our Collections</h2>
+        <div class="grid">
+          <article class="card" onclick="location.href='trousseau.html'">
+            <img src="trousseau1.png" alt="Trousseau collection">
+            <div class="body">
+              <div class="title">Trousseau Collection</div>
+              <div class="price-row"><div class="orig">₹2,499</div><div class="disc">₹2,249</div><div class="badge">10% OFF</div></div>
+            </div>
+          </article>
+
+          <article class="card" onclick="location.href='handcraft.html'">
+            <img src="handcraft1.png" alt="Handcraft collection">
+            <div class="body">
+              <div class="title">Handcraft Specials</div>
+              <div class="price-row"><div class="orig">₹999</div><div class="disc">₹899</div><div class="badge">10% OFF</div></div>
+            </div>
+          </article>
+
+          <article class="card" onclick="location.href='std.html'">
+            <img src="std1.png" alt="Standard gifts">
+            <div class="body">
+              <div class="title">Standard Gifts</div>
+              <div class="price-row"><div class="orig">₹549</div><div class="disc">₹494</div><div class="badge">10% OFF</div></div>
+            </div>
+          </article>
+
+          <article class="card" onclick="location.href='trolley.html'">
+            <img src="trolley1.png" alt="Trolley Collection">
+            <div class="body">
+              <div class="title">Trolley Collection</div>
+              <div class="price-row"><div class="orig">₹1,999</div><div class="disc">₹1,799</div><div class="badge">10% OFF</div></div>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="social">
+        <a href="https://instagram.com/wrapped.inn" target="_blank" rel="noopener noreferrer">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+          </svg>
+          @wrapped.inn
+        </a>
+      </div>
+      <div class="tnc">
+        <a href="#" id="openTncModal">Terms &amp; Conditions</a>
+        by @perf.cut
+      </div>
+    </footer>
+  </div>
+
+  <div id="tncModal" class="modal">
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <h2>📝 Terms & Conditions — Wrapped.inn</h2>
+      
+      <strong>1. Introduction</strong>
+      <p>Welcome to Wrapped.inn. By accessing or placing an order through our website, you agree to the following terms and conditions. Please read them carefully before making any purchase.</p>
+
+      <strong>2. Products & Customization</strong>
+      <p>All our products — including bouquets, trousseau wrapping, handcrafts, and customized gifts — are handmade or specially curated.</p>
+      <p>Colors, materials, and designs may slightly vary from sample images due to lighting or availability of decorative items.</p>
+
+      <strong>3. Orders & Payments</strong>
+      <p>Orders can be placed through our website, WhatsApp, or Instagram.</p>
+      <p>Full or partial payment may be required before confirmation, depending on customization.</p>
+      <p>Prices are subject to change without prior notice.</p>
+
+      <strong>4. Delivery & Pickup</strong>
+      <p>Delivery availability depends on location. Additional charges may apply.</p>
+      <p>Estimated delivery times are provided, but Wrapped.inn is not responsible for unexpected delays caused by courier or external factors.</p>
+      <p>Self-pickup options can be arranged for local customers.</p>
+
+      <strong>5. Cancellations & Refunds</strong>
+      <p>Orders once confirmed cannot be cancelled if materials have been purchased or customization has started.</p>
+      <p>Refunds will only be provided in cases of genuine issues (e.g., wrong product sent, damaged during delivery).</p>
+      <p>Refund processing may take 5–7 business days.</p>
+
+      <strong>6. Privacy Policy</strong>
+      <p>Your personal information (such as name, phone number, and address) will be used only for processing your order.</p>
+      <p>We do not share or sell your data to any third parties.</p>
+      
+      <strong>7. Intellectual Property</strong>
+      <p>All images, designs, and content on Wrapped.inn are taken in internet to use reference image.</p>
+      <p>Any unauthorized use or reproduction is strictly prohibited.</p>
+      
+      <strong>8. Contact Us</strong>
+      <p>For queries or complaints, you can reach us at:</p>
+      <p>📧 team.wrapped.inn@gmail.com</p>
+      <p>📱 +91 910000000000</p>
+      <p>📸 Instagram: @wrapped.inn</p>
+    </div>
+  </div>
+
+  <script>
+    // Fade slideshow functionality (existing code)
+    const slides = document.querySelectorAll('.slideshow img');
+    let idx = 0;
+    function showSlide(n) {
+      slides.forEach((img, i) => img.classList.toggle('active', i === n));
+    }
+    setInterval(() => {
+      idx = (idx + 1) % slides.length;
+      showSlide(idx);
+    }, 4000);
+
+    // TERMS & CONDITIONS MODAL FUNCTIONALITY (new code)
+    const modal = document.getElementById("tncModal");
+    const btn = document.getElementById("openTncModal");
+    const span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the link, open the modal 
+    btn.onclick = function(e) {
+      e.preventDefault(); // Prevents navigating away from the page
+      modal.style.display = "block";
+    }
+
+    // When the user clicks on (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
