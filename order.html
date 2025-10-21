@@ -1,0 +1,125 @@
+<!doctype html>  
+  
+<html lang="en">  
+<head>  
+  <meta charset="utf-8" />  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />  
+  <meta name="description" content="Wrapped.inn - Place Your Order" />  
+  <title>Order - Wrapped.inn</title>  
+  <style>  
+    :root {  
+      --maxw:1100px; --accent:#e91e63; --accent-light: rgba(233,30,99,0.1);  
+      --muted:#666; --bg:#fff; --text:#111; --border-radius:10px; --font-family:'Inter', system-ui, Arial, Helvetica, sans-serif;  
+    }  
+    *{box-sizing:border-box;}  
+    body{font-family:var(--font-family); margin:0; color:var(--text); background:#fafafa;}  
+    .container{max-width:var(--maxw); margin:0 auto; padding:18px 24px;}  
+    header{display:flex; justify-content:space-between; align-items:center; padding:12px 0; border-bottom:1px solid #eee;}  
+    header a{color:var(--accent); text-decoration:none; font-weight:600;}  
+    header a:hover{text-decoration:underline;}  
+    main{margin-top:24px; display:flex; flex-direction:column; gap:16px;}  
+    h1{font-size:1.8rem; margin-bottom:12px;}  
+    label{font-weight:600; margin-top:8px; display:block;}  
+    input, textarea{width:100%; padding:8px; border-radius:6px; border:1px solid #ccc; font-size:0.95rem;}  
+    .summary{background:#fff; padding:14px; border-radius:var(--border-radius); box-shadow:0 6px 18px rgba(16,24,40,0.06);}  
+    .summary p{margin:6px 0;}  
+    .btn{background:var(--accent); color:#fff; border:none; padding:10px 20px; border-radius:8px; cursor:pointer; font-size:1rem; margin-top:12px; transition:0.3s;}  
+    .btn:hover{background:#b0003a;}  
+    #orderSummary {
+      background: #fff;
+      padding: 10px 14px;
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 12px rgba(16, 24, 40, 0.05);
+      max-height: 200px;
+      overflow-y: auto;
+      margin-bottom: 16px;
+    }
+    #orderSummary p {
+      margin: 4px 0;
+      font-size: 0.95rem;
+    }
+    @media(max-width:720px){ main{gap:12px;} }  
+  </style>  
+</head>  
+<body>  
+  <div class="container">  
+    <header>  
+      <div class="brand">  
+        <img src="wrappedlogo.png" alt="Wrapped.inn logo" height="50">  
+      </div>  
+      <nav>  
+        <a href="index.html">← Back to Home</a>  
+      </nav>  
+    </header>
+    
+    <main>  
+      <h1>Place Your Order</h1>
+      
+      <div id="orderSummary" class="summary">
+        <h2>Order Summary</h2>
+      </div>
+      
+      <label for="customerName">Name</label>  
+      <input type="text" id="customerName" placeholder="Your Name" required>  
+      
+      <label for="address">Address</label>  
+      <textarea id="address" rows="3" placeholder="Your full address" required></textarea>  
+      
+      <label for="pincode">Pincode</label>  
+      <input type="text" id="pincode" placeholder="Pincode" required>  
+      
+      <label for="phone">Phone Number</label>  
+      <input type="tel" id="phone" placeholder="10-digit phone number" required>  
+      
+      <label for="email">Email (Optional)</label>  
+      <input type="email" id="email" placeholder="Your email">  
+      
+      <button class="btn" id="placeOrder">Place Order via WhatsApp</button>  
+    </main>  
+  </div>  
+  
+  <script>  
+    const urlParams = new URLSearchParams(window.location.search);
+    const orderItems = [];
+    let index = 0;
+
+    while (urlParams.has(`product${index}`)) {
+      const product = urlParams.get(`product${index}`);
+      const qty = parseInt(urlParams.get(`qty${index}`), 10) || 1;
+      orderItems.push({ product, quantity: qty });
+      index++;
+    }
+
+    // Display order summary
+    const orderSummaryDiv = document.getElementById('orderSummary');
+    orderItems.forEach(item => {
+      const p = document.createElement('p');
+      p.textContent = `Product: ${item.product}, Quantity: ${item.quantity}`;
+      orderSummaryDiv.appendChild(p);
+    });
+
+    document.getElementById('placeOrder').addEventListener('click', () => {
+      const name = document.getElementById('customerName').value.trim();
+      const address = document.getElementById('address').value.trim();
+      const pincode = document.getElementById('pincode').value.trim();
+      const phone = document.getElementById('phone').value.trim();
+      const email = document.getElementById('email').value.trim();
+
+      if(!name || !address || !pincode || !phone){
+        alert('Please fill all required fields.');
+        return;
+      }
+
+      // Create WhatsApp order message
+      const orderText = orderItems.map(item =>
+        `Product: ${item.product}\nQuantity: ${item.quantity}`
+      ).join('\n');
+
+      const message = `Hello,%0A*I want to place an order*%0A%0A${encodeURIComponent(orderText)}%0A%0AName: ${encodeURIComponent(name)}%0AAddress: ${encodeURIComponent(address)}%0APincode: ${encodeURIComponent(pincode)}%0APhone: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}`;
+
+      const waURL = `https://wa.me/917708750368?text=${message}`;
+      window.open(waURL, '_blank');
+    });
+  </script>
+</body>  
+</html>

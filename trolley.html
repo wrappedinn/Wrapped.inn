@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Wrapped.inn - Trolley Gifts Collection. Exclusive trolley gift items." />
+  <title>Trolley Collection - Wrapped.inn</title>
+  <style>
+    :root {
+      --maxw: 1100px;
+      --accent: #e91e63;
+      --accent-light: rgba(233, 30, 99, 0.1);
+      --muted: #666;
+      --bg: #fff;
+      --text: #111;
+      --shadow: rgba(16, 24, 40, 0.06);
+      --border-radius: 10px;
+      --transition: transform 0.2s ease-in-out;
+      --font-family: 'Inter', system-ui, Arial, Helvetica, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      margin: 0;
+      color: var(--text);
+      background: #fafafa;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container {
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 18px 24px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 0;
+      border-bottom: 1px solid #eee;
+    }
+
+    .brand img {
+      height: 54px;
+      width: auto;
+      display: block;
+    }
+
+    header a {
+      color: var(--accent);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+
+    header a:hover,
+    header a:focus {
+      color: #b0003a;
+      outline: none;
+      text-decoration: underline;
+    }
+
+    #cart-link {
+      margin-left: 12px;
+      font-size: 1.2rem;
+    }
+
+    main {
+      margin-top: 24px;
+    }
+
+    h1 {
+      font-weight: 700;
+      font-size: 2rem;
+      margin-bottom: 24px;
+      color: var(--text);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .card {
+      background: var(--bg);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 6px 18px var(--shadow);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    .card:hover,
+    .card:focus {
+      transform: scale(1.05);
+      box-shadow: 0 10px 30px rgba(233, 30, 99, 0.2);
+      outline: none;
+    }
+
+    .card img {
+      width: 100%;
+      height: 220px;
+      object-fit: contain;
+      display: block;
+      border-bottom: 1px solid #eee;
+      transition: transform 0.3s ease;
+    }
+
+    .card:hover img,
+    .card:focus img {
+      transform: scale(1.1);
+    }
+
+    .body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex-grow: 1;
+    }
+
+    .title {
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: var(--text);
+      user-select: text;
+    }
+
+    .price-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .orig {
+      color: var(--muted);
+      text-decoration: line-through;
+      font-size: 0.95rem;
+      user-select: text;
+    }
+
+    .disc {
+      font-weight: 700;
+      color: var(--accent);
+      font-size: 1rem;
+      user-select: text;
+    }
+
+    .btn {
+      border: none;
+      border-radius: var(--border-radius);
+      padding: 8px 12px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+      width: 100%;
+      text-align: center;
+      margin-top: 8px;
+      color: #fff;
+      background: #f25596;
+    }
+
+    .btn:hover,
+    .btn:focus {
+      background: #d43d7a;
+      transform: scale(1.03);
+      outline: none;
+    }
+
+    .cart-animation {
+      position: absolute;
+      z-index: 1000;
+      pointer-events: none;
+      transition: all 0.8s ease-in-out;
+      transform: scale(0.5);
+      opacity: 1;
+    }
+
+    .cart-animation.end {
+      transform: scale(0.1) translate(0, 0);
+      opacity: 0;
+    }
+
+    footer {
+      margin-top: 48px;
+      padding: 18px 0;
+      border-top: 1px solid #eee;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      user-select: none;
+    }
+
+    @media (max-width: 720px) {
+      .grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .card img {
+        height: 180px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <img src="wrappedlogo.png" alt="Wrapped.inn logo" />
+      </div>
+      <nav>
+        <a href="index.html" aria-label="Back to Home">← Back to Home</a>
+        <a href="cart.html" aria-label="Cart" id="cart-link">🛒</a>
+      </nav>
+    </header>
+
+    <main>
+      <h1>Trolley Collection</h1>
+      <div class="grid" role="list" id="product-grid"></div>
+    </main>
+
+    <footer>
+      &copy; 2025 Wrapped.inn. All rights reserved.
+    </footer>
+  </div>
+
+  <script>
+    const products = [
+      { id: 'trolley1', title: 'Trolley Item 1', orig: 2499, price: 2249, image: 'trolley1.png' },
+      { id: 'trolley2', title: 'Trolley Item 2', orig: 1999, price: 1799, image: 'trolley2.png' },
+      { id: 'trolley3', title: 'Trolley Item 3', orig: 2200, price: 1980, image: 'trolley3.png' },
+      { id: 'trolley4', title: 'Trolley Item 4', orig: 1850, price: 1665, image: 'trolley4.png' },
+      { id: 'trolley5', title: 'Trolley Item 5', orig: 2700, price: 2430, image: 'trolley5.png' },
+      { id: 'trolley6', title: 'Trolley Item 6', orig: 2100, price: 1890, image: 'trolley6.png' }
+    ];
+
+    function renderProducts() {
+      const grid = document.getElementById('product-grid');
+      grid.innerHTML = products.map(p => `
+        <article class="card" tabindex="0" onclick="openDetails('${p.id}')">
+          <img src="${p.image}" alt="${p.title}" />
+          <div class="body">
+            <div class="title">${p.title}</div>
+            <div class="price-row">
+              <div class="orig">₹${p.orig}</div>
+              <div class="disc">₹${p.price}</div>
+            </div>
+            <button class="btn add-to-cart" onclick="addToCart(event, '${p.id}')">Add to cart 🛒</button>
+            <button class="btn order-now" onclick="orderNow(event, '${p.id}')">Order Now</button>
+          </div>
+        </article>
+      `).join('');
+    }
+
+    function openDetails(id) {
+      location.href = `details.html?category=trolley&product=${id}`;
+    }
+
+    function addToCart(event, id) {
+      event.stopPropagation();
+      const product = products.find(p => p.id === id);
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const existing = cart.find(i => i.id === id);
+      if (existing) existing.quantity++;
+      else cart.push({ ...product, quantity: 1 });
+      localStorage.setItem('cart', JSON.stringify(cart));
+      animateAddToCart(event.target.closest('.card').querySelector('img'));
+    }
+
+    function orderNow(event, id) {
+      event.stopPropagation();
+      location.href = `details.html?category=trolley&product=${id}`;
+    }
+
+    function animateAddToCart(imageEl) {
+      const clone = imageEl.cloneNode(true);
+      const rect = imageEl.getBoundingClientRect();
+      const cartIcon = document.getElementById('cart-link').getBoundingClientRect();
+
+      clone.classList.add('cart-animation');
+      clone.style.top = `${rect.top}px`;
+      clone.style.left = `${rect.left}px`;
+      clone.style.width = `${rect.width}px`;
+      clone.style.height = `${rect.height}px`;
+      clone.style.position = 'fixed';
+      document.body.appendChild(clone);
+
+      setTimeout(() => {
+        clone.style.transform = `translate(${cartIcon.left - rect.left}px, ${cartIcon.top - rect.top}px) scale(0.1)`;
+        clone.style.opacity = '0';
+      }, 50);
+
+      setTimeout(() => clone.remove(), 800);
+    }
+
+    renderProducts();
+  </script>
+</body>
+</html>
