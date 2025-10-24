@@ -79,22 +79,93 @@
   </div>  
   
   <script>  
+    const allProducts = {  
+      trousseau: {  
+        trousseau1:{title:'Trousseau Item 1', disc:2249, img:'trousseau1.png'},  
+        trousseau2:{title:'Trousseau Item 2', disc:1799, img:'trousseau2.png'},  
+        trousseau3:{title:'Trousseau Item 3', disc:1980, img:'trousseau3.png'},  
+        trousseau4:{title:'Trousseau Item 4', disc:1665, img:'trousseau4.png'},  
+        trousseau5:{title:'Trousseau Item 5', disc:2430, img:'trousseau5.png'},  
+        trousseau6:{title:'Trousseau Item 6', disc:1890, img:'trousseau6.png'},  
+        trousseau7:{title:'Trousseau Item 7', disc:1755, img:'trousseau7.png'},  
+        trousseau8:{title:'Trousseau Item 8', disc:2115, img:'trousseau8.png'},  
+        trousseau9:{title:'Trousseau Item 9', disc:2340, img:'trousseau9.png'},  
+        trousseau10:{title:'Trousseau Item 10', disc:2700, img:'trousseau10.png'}  
+      },  
+      handcraft: {  
+        handcraft1:{title:'Handcraft Item 1', disc:999, img:'handcraft1.png'},  
+        handcraft2:{title:'Handcraft Item 2', disc:1099, img:'handcraft2.png'},  
+        handcraft3:{title:'Handcraft Item 3', disc:1199, img:'handcraft3.png'},  
+        handcraft4:{title:'Handcraft Item 4', disc:1299, img:'handcraft4.png'},  
+        handcraft5:{title:'Handcraft Item 5', disc:1399, img:'handcraft5.png'},  
+        handcraft6:{title:'Handcraft Item 6', disc:1499, img:'handcraft6.png'},  
+        handcraft7:{title:'Handcraft Item 7', disc:1599, img:'handcraft7.png'},  
+        handcraft8:{title:'Handcraft Item 8', disc:1699, img:'handcraft8.png'},  
+        handcraft9:{title:'Handcraft Item 9', disc:1799, img:'handcraft9.png'},  
+        handcraft10:{title:'Handcraft Item 10', disc:1899, img:'handcraft10.png'}  
+      },  
+      std: {  
+        std1:{title:'STD Item 1', disc:499, img:'std1.png'},  
+        std2:{title:'STD Item 2', disc:599, img:'std2.png'},  
+        std3:{title:'STD Item 3', disc:699, img:'std3.png'},  
+        std4:{title:'STD Item 4', disc:799, img:'std4.png'},  
+        std5:{title:'STD Item 5', disc:899, img:'std5.png'},  
+        std6:{title:'STD Item 6', disc:999, img:'std6.png'},  
+        std7:{title:'STD Item 7', disc:1099, img:'std7.png'},  
+        std8:{title:'STD Item 8', disc:1199, img:'std8.png'},  
+        std9:{title:'STD Item 9', disc:1299, img:'std9.png'},  
+        std10:{title:'STD Item 10', disc:1399, img:'std10.png'}  
+      },  
+      trolley: {
+        trolley1:{title:'Trolley Item 1', disc:2249, img:'trolley1.png'},
+        trolley2:{title:'Trolley Item 2', disc:1799, img:'trolley2.png'},
+        trolley3:{title:'Trolley Item 3', disc:1980, img:'trolley3.png'},
+        trolley4:{title:'Trolley Item 4', disc:1665, img:'trolley4.png'},
+        trolley5:{title:'Trolley Item 5', disc:2430, img:'trolley5.png'},
+        trolley6:{title:'Trolley Item 6', disc:1890, img:'trolley6.png'}
+      }
+    };
+
     const urlParams = new URLSearchParams(window.location.search);
     const orderItems = [];
     let index = 0;
 
     while (urlParams.has(`product${index}`)) {
-      const product = urlParams.get(`product${index}`);
+      const prodId = urlParams.get(`product${index}`);
       const qty = parseInt(urlParams.get(`qty${index}`), 10) || 1;
-      orderItems.push({ product, quantity: qty });
+      
+      // Find product in all categories:
+      let foundProduct = null;
+      for (const category of ['trousseau', 'handcraft', 'std', 'trolley']) {
+        if(allProducts[category] && allProducts[category][prodId]) {
+          foundProduct = allProducts[category][prodId];
+          break;
+        }
+      }
+      if(foundProduct) {
+        orderItems.push({
+          productId: prodId,
+          title: foundProduct.title,
+          price: foundProduct.disc,
+          quantity: qty
+        });
+      } else {
+        // fallback if not found
+        orderItems.push({
+          productId: prodId,
+          title: prodId,
+          price: 0,
+          quantity: qty
+        });
+      }
       index++;
     }
 
-    // Display order summary
     const orderSummaryDiv = document.getElementById('orderSummary');
+    orderSummaryDiv.innerHTML = '<h2>Order Summary</h2>';
     orderItems.forEach(item => {
       const p = document.createElement('p');
-      p.textContent = `Product: ${item.product}, Quantity: ${item.quantity}`;
+      p.textContent = `Product: ${item.title}, Quantity: ${item.quantity}, Price: ₹${item.price * item.quantity}`;
       orderSummaryDiv.appendChild(p);
     });
 
@@ -110,16 +181,15 @@
         return;
       }
 
-      // Create WhatsApp order message
-      const orderText = orderItems.map(item =>
-        `Product: ${item.product}\nQuantity: ${item.quantity}`
-      ).join('\n');
+      let orderText = orderItems.map(item =>
+        `Product: ${item.title}\nQuantity: ${item.quantity}\nPrice: ₹${item.price * item.quantity}`
+      ).join('\n\n');
 
       const message = `Hello,%0A*I want to place an order*%0A%0A${encodeURIComponent(orderText)}%0A%0AName: ${encodeURIComponent(name)}%0AAddress: ${encodeURIComponent(address)}%0APincode: ${encodeURIComponent(pincode)}%0APhone: ${encodeURIComponent(phone)}%0AEmail: ${encodeURIComponent(email)}`;
 
       const waURL = `https://wa.me/917708750368?text=${message}`;
       window.open(waURL, '_blank');
     });
-  </script>
+  </script>  
 </body>  
 </html>
