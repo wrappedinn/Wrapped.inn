@@ -1,280 +1,371 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Wrapped.inn - Gifts & Special Collections. Explore exclusive collections and special offers." />
-  <title>Wrapped.inn — Home</title>
-  <style>
-    :root {
-      --maxw: 1100px;
-      --accent: #e91e63;
-      --accent-light: rgba(233,30,99,0.1);
-      --muted: #666;
-      --bg: #fff;
-      --text: #111;
-      --shadow: rgba(16,24,40,0.06);
-      --font-family: 'Inter', system-ui, Arial, Helvetica, sans-serif;
-      --border-radius: 10px;
-      --transition: transform 0.25s ease-in-out;
-    }
-    * { box-sizing: border-box; }
-    body {
-      font-family: var(--font-family);
-      margin: 0;
-      color: var(--text);
-      background: #fafafa;
-      line-height: 1.4;
-      -webkit-font-smoothing: antialiased;
-    }
-    .container { max-width: var(--maxw); margin: 0 auto; padding: 18px 24px; }
-    header {
-      display: flex; justify-content: space-between; align-items: center;
-      padding: 12px 0; border-bottom: 1px solid #eee;
-    }
-    .brand { display: flex; align-items: center; gap: 16px; }
-    .brand img { height: 54px; width: auto; display: block; }
-    .brand-text .name { font-weight: 700; font-size: 1.25rem; }
-    .brand-text .tagline { font-size: 0.9rem; color: var(--muted); }
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="description" content="Wrapped.inn — handmade trousseau wrapping, curated hampers and custom gifting, made to order and delivered with care." />
+<title>wrapped.inn — Gifts &amp; Trousseau, Made With Care</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,400..600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --wine:#5C1A32;
+    --wine-deep:#33101C;
+    --gold:#B8862B;
+    --blush:#EFC9CD;
+    --silk:#FBF6EF;
+    --paper:#FFFFFF;
+    --ink:#251A1C;
+    --muted:#8A7574;
+    --line:#E9DFD6;
+    --maxw:1180px;
+    --radius:14px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    font-family:'Work Sans', system-ui, sans-serif;
+    color:var(--ink);
+    background:var(--silk);
+    line-height:1.55;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Fraunces', serif; margin:0; font-weight:600; letter-spacing:-0.01em;}
+  a{color:inherit;}
+  img{max-width:100%; display:block;}
+  .container{max-width:var(--maxw); margin:0 auto; padding:0 28px;}
 
-    nav.nav-icons { display: flex; gap: 16px; align-items: center; }
-    .icon {
-      width: 40px; height: 40px; display: inline-grid; place-items: center;
-      border-radius: 8px; background: #f2f2f2; cursor: pointer;
-      transition: background-color 0.3s ease; color: var(--accent);
-      border: 1px solid transparent;
-      text-decoration: none;
-    }
-    .icon:hover { background-color: var(--accent-light); border-color: var(--accent); }
+  @media (prefers-reduced-motion: reduce){
+    *{animation:none !important; transition:none !important;}
+  }
 
-    main { margin-top: 24px; }
+  /* ---------- HEADER ---------- */
+  header{
+    position:sticky; top:0; z-index:50;
+    background:rgba(251,246,239,0.92);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--line);
+  }
+  header .bar{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:14px 0;
+  }
+  .brand{display:flex; align-items:center; gap:14px;}
+  .brand img{height:44px; width:auto; border-radius:8px;}
+  .brand-text .name{font-family:'Fraunces', serif; font-size:1.3rem; font-weight:600;}
+  .brand-text .tagline{font-size:0.82rem; color:var(--muted);}
 
-    /* HERO SLIDESHOW FIXED */
-    #hero {
-      text-align: center;
-      padding: 20px;
-      background: linear-gradient(180deg, #fff, #f9f9f9);
-    }
-    .slideshow {
-      position: relative;
-      width: 100%;
-      overflow: hidden;
-    }
-    .slideshow img {
-      width: 100%;
-      height: auto;
-      border-radius: 20px;
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-      opacity: 0;
-      transition: opacity 1.5s ease-in-out;
-      display: block;
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-    .slideshow img.active {
-      position: relative;
-      opacity: 1;
-      z-index: 2;
-    }
+  nav.nav-icons{display:flex; gap:10px; align-items:center;}
+  .icon{
+    width:42px; height:42px; display:inline-grid; place-items:center;
+    border-radius:50%; background:transparent; color:var(--wine);
+    border:1px solid var(--line); text-decoration:none; font-size:1.05rem;
+    transition:background-color .2s ease, border-color .2s ease;
+  }
+  .icon:hover, .icon:focus-visible{background-color:var(--blush); border-color:var(--blush); outline:none;}
+  .icon:focus-visible{box-shadow:0 0 0 3px rgba(184,134,43,0.35);}
 
-    /* PRODUCTS */
-    .products { margin-top: 40px; }
-    .products h2 {
-      font-weight: 700; font-size: 1.5rem; border-bottom: 2px solid var(--accent);
-      display: inline-block; padding-bottom: 4px; margin-bottom: 18px;
-    }
+  /* ---------- HERO ---------- */
+  #hero{padding:56px 0 64px;}
+  .hero-grid{
+    display:grid; grid-template-columns:1.05fr 1fr; gap:56px; align-items:center;
+  }
+  .hero-copy h1{font-size:clamp(2.1rem, 3.4vw, 3.1rem); line-height:1.12; max-width:11ch;}
+  .hero-copy p{margin:20px 0 28px; max-width:38ch; color:#4A3B3C; font-size:1.05rem;}
+  .hero-ctas{display:flex; gap:14px; flex-wrap:wrap;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:13px 22px; border-radius:999px; font-weight:500; font-size:0.95rem;
+    text-decoration:none; border:1px solid transparent; cursor:pointer;
+    transition:transform .18s ease, box-shadow .18s ease;
+  }
+  .btn:hover{transform:translateY(-1px);}
+  .btn-primary{background:var(--wine); color:var(--silk);}
+  .btn-primary:hover{box-shadow:0 8px 20px rgba(92,26,50,0.28);}
+  .btn-ghost{background:transparent; border-color:var(--wine); color:var(--wine);}
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 22px;
-    }
-    .card {
-      background: var(--bg); border-radius: var(--border-radius);
-      overflow: hidden; box-shadow: 0 6px 18px var(--shadow);
-      display: flex; flex-direction: column; cursor: pointer;
-      transition: var(--transition);
-    }
-    .card:hover { transform: scale(1.05); box-shadow: 0 10px 28px rgba(233,30,99,0.25); }
-    .card img {
-      width: 100%; height: 220px; object-fit: contain; background: #fff;
-      border-bottom: 1px solid #eee;
-    }
-    .body { padding: 16px 14px; display: flex; flex-direction: column; gap: 10px; }
-    .title { font-weight: 600; font-size: 1.1rem; }
-    .price-row { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .orig { color: var(--muted); text-decoration: line-through; font-size: 0.95rem; }
-    .disc { font-weight: 700; color: var(--accent); }
-    .badge { background: var(--accent-light); color: var(--accent); padding: 4px 10px; border-radius: 6px; font-size: 0.85rem; font-weight: 600; }
+  .hero-frame{
+    position:relative; border-radius:22px 22px 22px 4px;
+    overflow:hidden; box-shadow:0 20px 50px rgba(51,16,28,0.18);
+    aspect-ratio:4/5; background:var(--wine-deep);
+  }
+  .hero-frame::after{
+    content:""; position:absolute; right:0; bottom:0; width:46px; height:46px;
+    background:var(--silk);
+    clip-path:polygon(100% 0, 0 100%, 100% 100%);
+    z-index:3;
+  }
+  .slideshow{position:absolute; inset:0;}
+  .slideshow img{
+    position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
+    opacity:0; transition:opacity 1.4s ease-in-out;
+  }
+  .slideshow img.active{opacity:1;}
+  .dots{position:absolute; left:18px; bottom:16px; z-index:4; display:flex; gap:6px;}
+  .dots span{width:6px; height:6px; border-radius:50%; background:rgba(255,255,255,0.45);}
+  .dots span.active{background:#fff;}
 
-    footer {
-      margin-top: 50px; padding: 24px 0; border-top: 1px solid #eee;
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px; font-size: 0.9rem; color: var(--muted);
-    }
-    .social a { 
-      text-decoration: none; color: inherit; font-weight: 600; transition: color 0.3s ease; 
-      /* Style to align icon and text */
-      display: inline-flex; 
-      align-items: center; 
-      gap: 6px;
-    }
-    .social a:hover { color: var(--accent); }
-    .social svg { fill: currentColor; } /* Ensures the icon color changes on hover */
+  /* ---------- TRUST STRIP ---------- */
+  .strip{border-top:1px solid var(--line); border-bottom:1px solid var(--line); background:var(--paper);}
+  .strip .container{
+    display:flex; justify-content:space-between; flex-wrap:wrap; gap:18px;
+    padding:22px 28px; font-size:0.92rem; color:#4A3B3C;
+  }
+  .strip .item{display:flex; align-items:center; gap:10px;}
+  .strip .item::before{content:"·"; color:var(--gold); font-size:1.4rem; line-height:0;}
+  .strip .item:first-child::before{display:none;}
 
-    @media (max-width: 720px) {
-      .grid { grid-template-columns: repeat(2, 1fr); }
-      .brand img { height: 46px; }
-      footer { flex-direction: column; align-items: flex-start; }
-    }
+  /* ---------- COLLECTIONS ---------- */
+  .products{padding:64px 0;}
+  .section-head{display:flex; justify-content:space-between; align-items:baseline; margin-bottom:30px; gap:20px; flex-wrap:wrap;}
+  .section-head h2{font-size:1.7rem;}
+  .section-head p{margin:0; color:var(--muted); max-width:34ch; font-size:0.95rem;}
 
-    /* MODAL STYLES */
-    .modal {
-      display: none; /* Hidden by default */
-      position: fixed;
-      z-index: 1000;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-    .modal-content {
-      background-color: var(--bg);
-      margin: 10% auto; /* 10% from the top and centered */
-      padding: 20px;
-      border-radius: var(--border-radius);
-      width: 90%;
-      max-width: 600px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      max-height: 80vh; /* Max height to allow scrolling */
-      overflow-y: auto;
-      position: relative;
-    }
-    .modal-content h2 { color: var(--accent); margin-top: 0; }
-    .modal-content p { margin: 10px 0; }
-    .close {
-      color: var(--muted);
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-      line-height: 1;
-      transition: color 0.3s ease;
-    }
-    .close:hover,
-    .close:focus {
-      color: var(--accent);
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .modal-content strong { font-weight: 700; display: block; margin: 10px 0 5px 0; }
-  </style>
+  .grid{display:grid; grid-template-columns:repeat(4, 1fr); gap:24px;}
+  .card{
+    background:var(--paper); border-radius:var(--radius);
+    overflow:hidden; border:1px solid var(--line);
+    display:flex; flex-direction:column; text-decoration:none; color:inherit;
+    transition:box-shadow .22s ease, border-color .22s ease;
+  }
+  .card:hover, .card:focus-visible{box-shadow:0 16px 34px rgba(51,16,28,0.14); border-color:transparent; outline:none;}
+  .card .thumb{position:relative; background:#fff; height:230px;}
+  .card .thumb img{width:100%; height:100%; object-fit:contain; padding:18px;}
+  .seal{
+    position:absolute; top:12px; right:12px; width:52px; height:52px; border-radius:50%;
+    background:var(--wine); color:var(--silk); display:grid; place-items:center;
+    font-size:0.72rem; font-weight:600; text-align:center; line-height:1.15;
+    box-shadow:0 4px 10px rgba(51,16,28,0.25);
+  }
+  .card .body{padding:16px 18px 20px; display:flex; flex-direction:column; gap:8px; border-top:1px solid var(--line);}
+  .card .title{font-family:'Fraunces', serif; font-size:1.08rem; font-weight:600;}
+  .price-row{display:flex; align-items:baseline; gap:10px;}
+  .orig{color:var(--muted); text-decoration:line-through; font-size:0.9rem;}
+  .disc{font-weight:600; color:var(--wine); font-size:1.05rem;}
+
+  /* ---------- SPECIAL REQUEST ---------- */
+  #specialReq{padding:60px 0; background:var(--paper); border-top:1px solid var(--line); border-bottom:1px solid var(--line);}
+  .req-grid{display:grid; grid-template-columns:1.1fr 0.9fr; gap:40px; align-items:center;}
+  .req-grid h2{font-size:1.6rem; margin-bottom:14px;}
+  .req-grid p{color:#4A3B3C; max-width:42ch;}
+  .req-actions{display:flex; flex-direction:column; gap:12px; background:var(--silk); border:1px solid var(--line); border-radius:var(--radius); padding:24px;}
+  .req-actions .row{display:flex; justify-content:space-between; align-items:center; gap:12px; font-size:0.95rem;}
+  .req-actions .row + .row{border-top:1px dashed var(--line); padding-top:12px;}
+
+  /* ---------- FOOTER ---------- */
+  footer{background:var(--wine-deep); color:#EADFDB; padding:44px 0 30px; margin-top:20px;}
+  .footer-grid{display:flex; justify-content:space-between; flex-wrap:wrap; gap:26px; padding-bottom:26px; border-bottom:1px solid rgba(255,255,255,0.12);}
+  footer .name{font-family:'Fraunces', serif; font-size:1.25rem; color:#fff;}
+  footer .tagline{color:rgba(234,223,219,0.7); font-size:0.9rem; margin-top:4px;}
+  .social a{display:inline-flex; align-items:center; gap:8px; text-decoration:none; color:#EADFDB; font-weight:500; font-size:0.92rem; transition:color .2s ease;}
+  .social a:hover{color:var(--gold);}
+  .social svg{fill:currentColor;}
+  .foot-bottom{display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; padding-top:18px; font-size:0.85rem; color:rgba(234,223,219,0.65);}
+  .foot-bottom a{text-decoration:underline; text-underline-offset:2px;}
+
+  /* ---------- WHATSAPP FLOAT ---------- */
+  .wa-float{
+    position:fixed; right:20px; bottom:20px; z-index:60;
+    width:56px; height:56px; border-radius:50%; background:#25D366;
+    display:grid; place-items:center; box-shadow:0 10px 24px rgba(0,0,0,0.25);
+    text-decoration:none;
+  }
+  .wa-float svg{width:26px; height:26px; fill:#fff;}
+
+  /* ---------- MODAL ---------- */
+  .modal{display:none; position:fixed; inset:0; z-index:100; background:rgba(37,26,28,0.55); overflow:auto;}
+  .modal-content{
+    background:var(--paper); margin:6% auto; padding:28px 30px; border-radius:var(--radius);
+    width:92%; max-width:620px; max-height:82vh; overflow-y:auto; position:relative;
+  }
+  .modal-content h2{color:var(--wine); margin-bottom:12px; font-size:1.4rem;}
+  .modal-content p{margin:8px 0; font-size:0.95rem; color:#4A3B3C;}
+  .modal-content strong{display:block; margin:16px 0 4px; color:var(--ink);}
+  .close{position:absolute; top:18px; right:22px; font-size:1.6rem; color:var(--muted); cursor:pointer; line-height:1;}
+  .close:hover, .close:focus-visible{color:var(--wine);}
+
+  @media (max-width:860px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-frame{order:-1; aspect-ratio:16/10;}
+    .grid{grid-template-columns:repeat(2, 1fr);}
+    .req-grid{grid-template-columns:1fr;}
+    .strip .container{flex-direction:column; align-items:flex-start;}
+    .strip .item::before{display:none;}
+  }
+  @media (max-width:480px){
+    .grid{grid-template-columns:1fr;}
+  }
+</style>
 </head>
-
 <body>
-  <div class="container">
-    <header>
+
+  <header>
+    <div class="container bar">
       <div class="brand">
-        <img src="wrappedlogo.png" alt="Wrapped.inn logo" />
+        <img src="wrappedlogo.png" alt="Wrapped.inn logo">
         <div class="brand-text">
           <div class="name">wrapped.inn</div>
-          <div class="tagline">Gifts &amp; Special Collections</div>
+          <div class="tagline">Gifts &amp; trousseau, made with care</div>
         </div>
       </div>
-      <nav class="nav-icons">
-        <a href="cart.html" class="icon" title="Cart">🛒</a>
-        <a href="tel:+910000000000" class="icon" title="Contact">📞</a>
-        <a href="#specialReq" class="icon" title="Special Request">🗒</a>
+      <nav class="nav-icons" aria-label="Quick links">
+        <a href="cart.html" class="icon" title="Cart" aria-label="Cart">🛒</a>
+        <a href="tel:+910000000000" class="icon" title="Call us" aria-label="Call us">📞</a>
+        <a href="#specialReq" class="icon" title="Special request" aria-label="Special request">🗒</a>
       </nav>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <section id="hero">
-        <div class="slideshow">
-          <img src="Poster.png" alt="Wrapped.inn banner 1" class="active">
-          <img src="Poster1.png" alt="Wrapped.inn banner 2">
+  <main>
+    <section id="hero">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <h1>Every gift, wrapped with intention.</h1>
+          <p>Handmade trousseau wrapping, curated hampers and custom gifting — made to order and delivered with care across Tamil Nadu.</p>
+          <div class="hero-ctas">
+            <a href="#collections" class="btn btn-primary">Browse collections</a>
+            <a href="https://wa.me/910000000000" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">Message us on WhatsApp</a>
+          </div>
         </div>
-      </section>
+        <div class="hero-frame">
+          <div class="slideshow">
+            <img src="Poster.png" alt="Wrapped.inn gift styling, banner 1" class="active">
+            <img src="Poster1.png" alt="Wrapped.inn gift styling, banner 2">
+          </div>
+          <div class="dots" aria-hidden="true"><span class="active"></span><span></span></div>
+        </div>
+      </div>
+    </section>
 
-      <section class="products">
-        <h2>Our Collections</h2>
+    <div class="strip">
+      <div class="container">
+        <div class="item">Handmade, made to order</div>
+        <div class="item">Custom colours &amp; themes</div>
+        <div class="item">Local delivery across Tamil Nadu</div>
+      </div>
+    </div>
+
+    <section class="products" id="collections">
+      <div class="container">
+        <div class="section-head">
+          <h2>Our collections</h2>
+          <p>Four ways to gift — from a single wrapped box to a full trousseau set.</p>
+        </div>
         <div class="grid">
-          <article class="card" onclick="location.href='trousseau.html'">
-            <img src="trousseau1.png" alt="Trousseau collection">
+          <a class="card" href="trousseau.html">
+            <div class="thumb">
+              <img src="trousseau1.png" alt="Trousseau collection">
+              <div class="seal">10%<br>OFF</div>
+            </div>
             <div class="body">
               <div class="title">Trousseau Collection</div>
-              <div class="price-row"><div class="orig">₹2,499</div><div class="disc">₹2,249</div><div class="badge">10% OFF</div></div>
+              <div class="price-row"><span class="orig">₹2,499</span><span class="disc">₹2,249</span></div>
             </div>
-          </article>
+          </a>
 
-          <article class="card" onclick="location.href='handcraft.html'">
-            <img src="handcraft1.png" alt="Handcraft collection">
+          <a class="card" href="handcraft.html">
+            <div class="thumb">
+              <img src="handcraft1.png" alt="Handcraft collection">
+              <div class="seal">10%<br>OFF</div>
+            </div>
             <div class="body">
               <div class="title">Handcraft Specials</div>
-              <div class="price-row"><div class="orig">₹999</div><div class="disc">₹899</div><div class="badge">10% OFF</div></div>
+              <div class="price-row"><span class="orig">₹999</span><span class="disc">₹899</span></div>
             </div>
-          </article>
+          </a>
 
-          <article class="card" onclick="location.href='std.html'">
-            <img src="std1.png" alt="Standard gifts">
+          <a class="card" href="std.html">
+            <div class="thumb">
+              <img src="std1.png" alt="Standard gifts">
+              <div class="seal">10%<br>OFF</div>
+            </div>
             <div class="body">
               <div class="title">Standard Gifts</div>
-              <div class="price-row"><div class="orig">₹549</div><div class="disc">₹494</div><div class="badge">10% OFF</div></div>
+              <div class="price-row"><span class="orig">₹549</span><span class="disc">₹494</span></div>
             </div>
-          </article>
+          </a>
 
-          <article class="card" onclick="location.href='trolley.html'">
-            <img src="trolley1.png" alt="Trolley Collection">
+          <a class="card" href="trolley.html">
+            <div class="thumb">
+              <img src="trolley1.png" alt="Trolley collection">
+              <div class="seal">10%<br>OFF</div>
+            </div>
             <div class="body">
               <div class="title">Trolley Collection</div>
-              <div class="price-row"><div class="orig">₹1,999</div><div class="disc">₹1,799</div><div class="badge">10% OFF</div></div>
+              <div class="price-row"><span class="orig">₹1,999</span><span class="disc">₹1,799</span></div>
             </div>
-          </article>
+          </a>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
 
-    <footer>
-      <div class="social">
-        <a href="https://instagram.com/wrapped.inn" target="_blank" rel="noopener noreferrer">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
-            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
-          </svg>
-          @wrapped.inn
-        </a>
+    <section id="specialReq">
+      <div class="container req-grid">
+        <div>
+          <h2>Have something specific in mind?</h2>
+          <p>Custom colours, themes, or a wrap for an occasion not listed here — tell us what you're planning and we'll put a quote together.</p>
+        </div>
+        <div class="req-actions">
+          <div class="row"><span>WhatsApp</span><a class="btn btn-primary" href="https://wa.me/910000000000" target="_blank" rel="noopener noreferrer">Chat now</a></div>
+          <div class="row"><span>Email</span><a href="mailto:team.wrapped.inn@gmail.com">team.wrapped.inn@gmail.com</a></div>
+          <div class="row"><span>Instagram</span><a href="https://instagram.com/wrapped.inn" target="_blank" rel="noopener noreferrer">@wrapped.inn</a></div>
+        </div>
       </div>
-      <div class="tnc">
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="name">wrapped.inn</div>
+          <div class="tagline">Gifts &amp; trousseau, made with care</div>
+        </div>
+        <div class="social">
+          <a href="https://instagram.com/wrapped.inn" target="_blank" rel="noopener noreferrer">
+            <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 16 16">
+              <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.9 3.9 0 0 0-1.417.923A3.9 3.9 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.9 3.9 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.9 3.9 0 0 0-.923-1.417A3.9 3.9 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599s.453.546.598.92c.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.5 2.5 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.5 2.5 0 0 1-.92-.598 2.5 2.5 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233s.008-2.388.046-3.231c.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92s.546-.453.92-.598c.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92m-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217m0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334"/>
+            </svg>
+            @wrapped.inn
+          </a>
+        </div>
+      </div>
+      <div class="foot-bottom">
         <a href="#" id="openTncModal">Terms &amp; Conditions</a>
-        by @perf.cut
+        <span>Site by @perf.cut</span>
       </div>
-    </footer>
-  </div>
+    </div>
+  </footer>
+
+  <a class="wa-float" href="https://wa.me/910000000000" target="_blank" rel="noopener noreferrer" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24"><path d="M20.5 3.5A11.5 11.5 0 0 0 3.6 17.9L2 22l4.2-1.6A11.5 11.5 0 1 0 20.5 3.5zm-8.4 17.8a9.6 9.6 0 0 1-4.9-1.3l-.35-.2-2.8 1 1-2.7-.22-.37a9.6 9.6 0 1 1 7.27 3.6zm5.3-7.2c-.28-.14-1.66-.82-1.9-.9-.26-.1-.45-.14-.63.14-.2.28-.72.9-.88 1.08-.16.18-.32.2-.6.07-1.6-.8-2.65-1.43-3.7-3.24-.28-.48.28-.44.8-1.48.1-.2.05-.36-.04-.5-.1-.14-.65-1.56-.9-2.14-.23-.56-.47-.48-.65-.5h-.55c-.18 0-.48.07-.73.36-.26.28-1 1-1 2.4s1.03 2.77 1.17 2.96c.14.18 1.98 3.02 4.8 4.11 2.35.92 2.35.62 2.77.58.42-.04 1.36-.56 1.55-1.1.2-.55.2-1.02.14-1.1-.05-.1-.24-.16-.52-.3z"/></svg>
+  </a>
 
   <div id="tncModal" class="modal">
     <div class="modal-content">
-      <span class="close">&times;</span>
-      <h2>📝 Terms & Conditions — Wrapped.inn</h2>
-      
+      <span class="close" tabindex="0">&times;</span>
+      <h2>Terms &amp; Conditions — Wrapped.inn</h2>
+
       <strong>1. Introduction</strong>
       <p>Welcome to Wrapped.inn. By accessing or placing an order through our website, you agree to the following terms and conditions. Please read them carefully before making any purchase.</p>
 
-      <strong>2. Products & Customization</strong>
+      <strong>2. Products &amp; Customization</strong>
       <p>All our products — including bouquets, trousseau wrapping, handcrafts, and customized gifts — are handmade or specially curated.</p>
       <p>Colors, materials, and designs may slightly vary from sample images due to lighting or availability of decorative items.</p>
 
-      <strong>3. Orders & Payments</strong>
+      <strong>3. Orders &amp; Payments</strong>
       <p>Orders can be placed through our website, WhatsApp, or Instagram.</p>
       <p>Full or partial payment may be required before confirmation, depending on customization.</p>
       <p>Prices are subject to change without prior notice.</p>
 
-      <strong>4. Delivery & Pickup</strong>
+      <strong>4. Delivery &amp; Pickup</strong>
       <p>Delivery availability depends on location. Additional charges may apply.</p>
       <p>Estimated delivery times are provided, but Wrapped.inn is not responsible for unexpected delays caused by courier or external factors.</p>
       <p>Self-pickup options can be arranged for local customers.</p>
 
-      <strong>5. Cancellations & Refunds</strong>
+      <strong>5. Cancellations &amp; Refunds</strong>
       <p>Orders once confirmed cannot be cancelled if materials have been purchased or customization has started.</p>
       <p>Refunds will only be provided in cases of genuine issues (e.g., wrong product sent, damaged during delivery).</p>
       <p>Refund processing may take 5–7 business days.</p>
@@ -282,53 +373,45 @@
       <strong>6. Privacy Policy</strong>
       <p>Your personal information (such as name, phone number, and address) will be used only for processing your order.</p>
       <p>We do not share or sell your data to any third parties.</p>
-      
+
       <strong>7. Intellectual Property</strong>
-      <p>All images, designs, and content on Wrapped.inn are taken in internet to use reference image.</p>
+      <p>All images, designs, and content on Wrapped.inn are taken from the internet for reference purposes only.</p>
       <p>Any unauthorized use or reproduction is strictly prohibited.</p>
-      
+
       <strong>8. Contact Us</strong>
       <p>For queries or complaints, you can reach us at:</p>
-      <p>📧 team.wrapped.inn@gmail.com</p>
-      <p>📱 +91 910000000000</p>
-      <p>📸 Instagram: @wrapped.inn</p>
+      <p>team.wrapped.inn@gmail.com</p>
+      <p>+91 910000000000</p>
+      <p>Instagram: @wrapped.inn</p>
     </div>
   </div>
 
   <script>
-    // Fade slideshow functionality (existing code)
+    // Hero slideshow with dot indicators
     const slides = document.querySelectorAll('.slideshow img');
+    const dots = document.querySelectorAll('.dots span');
     let idx = 0;
-    function showSlide(n) {
+    function showSlide(n){
       slides.forEach((img, i) => img.classList.toggle('active', i === n));
+      dots.forEach((d, i) => d.classList.toggle('active', i === n));
     }
-    setInterval(() => {
-      idx = (idx + 1) % slides.length;
-      showSlide(idx);
-    }, 4000);
-
-    // TERMS & CONDITIONS MODAL FUNCTIONALITY (new code)
-    const modal = document.getElementById("tncModal");
-    const btn = document.getElementById("openTncModal");
-    const span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the link, open the modal 
-    btn.onclick = function(e) {
-      e.preventDefault(); // Prevents navigating away from the page
-      modal.style.display = "block";
+    if (slides.length > 1) {
+      setInterval(() => { idx = (idx + 1) % slides.length; showSlide(idx); }, 4500);
     }
 
-    // When the user clicks on (x), close the modal
-    span.onclick = function() {
-      modal.style.display = "none";
-    }
+    // Terms & Conditions modal
+    const modal = document.getElementById('tncModal');
+    const openBtn = document.getElementById('openTncModal');
+    const closeBtn = document.querySelector('.close');
 
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function(event) {
-      if (event.target == modal) {
-        modal.style.display = "none";
-      }
-    }
+    function openModal(e){ e.preventDefault(); modal.style.display = 'block'; }
+    function closeModal(){ modal.style.display = 'none'; }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    closeBtn.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') closeModal(); });
+    window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    window.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
   </script>
 </body>
 </html>
